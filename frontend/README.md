@@ -1,8 +1,10 @@
-# React + Vite
+## Our Express API should include functionality for the following user stories:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[X] As a guest, I should be able to create an account.
+[X] As a guest with an account, I should be able to log in to my account.
+[ ] AAU, I should be able to create a hoot post.
+[ ] AAU, I should be able to read a list of all hoots.
+[ ] AAU, I should be able to view information about a single hoot post along with its associated comments.
+[ ] AAU, I should be able to add a comment to a specific hoot.
+[ ] As the author of a hoot, I should be able to update that hoot.
+[ ] As the author of a hoot, I should be able to delete that hoot.
