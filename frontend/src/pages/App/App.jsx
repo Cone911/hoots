@@ -23,6 +23,12 @@ function App() {
     navigate('/hoots');
   };
 
+  const handleUpdateHoot = async (hootId, hootFormData) => {
+    const updatedHoot = await hootService.update(hootId, hootFormData);
+    setHoots(hoots.map((hoot) => (hootId === hoot._id ? updatedHoot : hoot)));
+    navigate(`/hoots/${hootId}`);
+  };
+
   const handleDeleteHoot = async (hootId) => {
     const deletedHoot = await hootService.deleteHoot(hootId);
     setHoots(hoots.filter((hoot) => hoot._id !== hootId));
@@ -46,6 +52,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/hoots" element={<HootListPage hoots={hoots}/>} />
             <Route path="/hoots/:hootId" element={<HootDetailsPage user={user} handleDeleteHoot={handleDeleteHoot} />} />
+            <Route path="/hoots/:hootId/edit" element={<NewHootPage handleUpdateHoot={handleUpdateHoot}/>} />
             <Route path="/hoots/new" element={<NewHootPage handleAddHoot={handleAddHoot}/>} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

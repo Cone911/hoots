@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
-// import { AuthedUserContext } from "../../App";
+import { useParams, Link } from "react-router-dom";
 import * as hootService from "../../services/hootService";
 import CommentFormPage from "../CommentFormPage/CommentFormPage";
 
@@ -18,13 +17,10 @@ export default function HootDetailsPage(props) {
   useEffect(() => {
     const fetchHoot = async () => {
       const hootData = await hootService.show(hootId);
-      console.log("hootData: ", hootData);
       setHoot(hootData);
     };
     fetchHoot();
   }, [hootId]);
-
-  console.log("hoot state:", hoot);
 
   if (!hoot) return <main>Loading...</main>;
 
@@ -39,6 +35,7 @@ export default function HootDetailsPage(props) {
         </p>
         {hoot.author._id === props.user._id && (
           <>
+             <Link to={`/hoots/${hootId}/edit`}>Edit</Link> &nbsp;
             <button onClick={() => props.handleDeleteHoot(hootId)}>Delete</button>
           </>
         )}
