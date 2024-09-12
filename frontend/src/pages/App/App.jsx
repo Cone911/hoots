@@ -5,10 +5,12 @@ import './App.css';
 import NavBar from '../../components/NavBar/NavBar';
 import HomePage from '../HomePage/HomePage';
 import HootListPage from '../HootListPage/HootListPage'
+import HootDetailsPage from '../HootDetailsPage/HootDetailsPage'
 import NewPostPage from '../NewPostPage/NewPostPage';
 import SignUpPage from '../SignUpPage/SignUpPage';
 import LogInPage from '../LogInPage/LogInPage';
 import * as hootService from '../../services/hootService';
+
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -31,6 +33,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/hoots" element={<HootListPage hoots={hoots}/>} />
+            <Route path="/hoots/:hootId" element={<HootDetailsPage />} />
             <Route path="/hoots/new" element={<NewPostPage />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
