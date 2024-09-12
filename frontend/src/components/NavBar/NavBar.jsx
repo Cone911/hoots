@@ -16,7 +16,7 @@ export default function NavBar({ user, setUser }) {
         <>
           <Link to="/hoots">Hoot List</Link>
           &nbsp; | &nbsp;
-          <Link to="/hoots/new">New Post</Link>
+          <Link to="/hoots/new">New Hoot</Link>
           &nbsp; | &nbsp;
           <Link to="" onClick={handleLogOut}>
             Log Out
