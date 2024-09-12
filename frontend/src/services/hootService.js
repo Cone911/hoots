@@ -11,5 +11,9 @@ export function show (hootId) {
 }
 
 export function create (hootFormData){
-    return sendRequest(`${BASE_URL}`, 'POST', hootFormData)
+    return sendRequest(`${BASE_URL}`, 'POST', hootFormData);
+}
+
+export function createComment (hootId, commentFormPage) {
+    return sendRequest(`${BASE_URL}/${hootId}/comments`, 'POST', commentFormPage);
 }
