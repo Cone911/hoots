@@ -23,6 +23,11 @@ function App() {
     navigate('/hoots');
   };
 
+  const handleDeleteHoot = async (hootId) => {
+    const deletedHoot = await hootService.deleteHoot(hootId);
+    setHoots(hoots.filter((hoot) => hoot._id !== hootId));
+    navigate('/hoots');
+  };
 
   useEffect(() => {
     const fetchAllHoots = async () => {
@@ -40,7 +45,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/hoots" element={<HootListPage hoots={hoots}/>} />
-            <Route path="/hoots/:hootId" element={<HootDetailsPage />} />
+            <Route path="/hoots/:hootId" element={<HootDetailsPage user={user} handleDeleteHoot={handleDeleteHoot} />} />
             <Route path="/hoots/new" element={<NewHootPage handleAddHoot={handleAddHoot}/>} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

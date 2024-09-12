@@ -1,13 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
+// import { AuthedUserContext } from "../../App";
 import * as hootService from "../../services/hootService";
-import CommentFormPage from '../CommentFormPage/CommentFormPage';
+import CommentFormPage from "../CommentFormPage/CommentFormPage";
 
 export default function HootDetailsPage(props) {
   const { hootId } = useParams();
-  console.log("hootId", hootId);
 
   const [hoot, setHoot] = useState(null);
+  // const user = useContext(AuthedUserContext);
 
   const handleAddComment = async (commentFormData) => {
     const newComment = await hootService.createComment(hootId, commentFormData);
@@ -33,14 +34,19 @@ export default function HootDetailsPage(props) {
         <p>{hoot.category.toUpperCase()}</p>
         <h1>{hoot.title}</h1>
         <p>
-          {hoot.author.name} posted on
+          {hoot.author?.name} posted on
           {new Date(hoot.createdAt).toLocaleDateString()}
         </p>
+        {hoot.author._id === props.user._id && (
+          <>
+            <button onClick={() => props.handleDeleteHoot(hootId)}>Delete</button>
+          </>
+        )}
       </header>
       <p>{hoot.text}</p>
       <section>
         <h2>Comments</h2>
-        <CommentFormPage handleAddComment={handleAddComment}/>
+        <CommentFormPage handleAddComment={handleAddComment} />
         {!hoot.comments.length && <p>There are no comments.</p>}
         {hoot.comments.map((comment) => (
           <article key={comment._id}>

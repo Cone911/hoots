@@ -17,3 +17,7 @@ export function create (hootFormData){
 export function createComment (hootId, commentFormPage) {
     return sendRequest(`${BASE_URL}/${hootId}/comments`, 'POST', commentFormPage);
 }
+
+export function deleteHoot (hootId) {
+    return sendRequest(`${BASE_URL}/${hootId}`, 'DELETE')
+}
