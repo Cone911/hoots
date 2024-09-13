@@ -35,6 +35,11 @@ function App() {
     navigate('/hoots');
   };
 
+  const handleAddComment = async (updatedHoot) => {
+    const updatedHoots = hoots.map((hoot) => hoot._id === updatedHoot._id ? updatedHoot : hoot );
+    setHoots(updatedHoots);
+  } 
+
   useEffect(() => {
     const fetchAllHoots = async () => {
       const hootsData = await hootService.index();
@@ -51,7 +56,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/hoots" element={<HootListPage hoots={hoots}/>} />
-            <Route path="/hoots/:hootId" element={<HootDetailsPage user={user} handleDeleteHoot={handleDeleteHoot} />} />
+            <Route path="/hoots/:hootId" element={<HootDetailsPage user={user} handleDeleteHoot={handleDeleteHoot} handleAddComment={handleAddComment} hoots={hoots}/>} />
             <Route path="/hoots/:hootId/edit" element={<NewHootPage handleUpdateHoot={handleUpdateHoot}/>} />
             <Route path="/hoots/new" element={<NewHootPage handleAddHoot={handleAddHoot}/>} />
             <Route path="*" element={<Navigate to="/" />} />

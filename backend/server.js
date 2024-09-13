@@ -1,7 +1,6 @@
 const path = require('path'); // Built into Node
 const express = require('express');
 const logger = require('morgan');
-const hootsRouter = require('./controllers/hoots.js');
 const app = express();
 
 
@@ -37,7 +36,8 @@ app.use('/api/auth', require('./routes/auth'));
 // app.use('/api/posts', ensureLoggedIn, require('./routes/posts'));
 
 const ensureLoggedIn = require('./middleware/ensureLoggedIn');
-app.use('/api/hoots', ensureLoggedIn, hootsRouter);
+app.use('/api/hoots', ensureLoggedIn, require('./routes/hoots.js'));
+app.use('/api', ensureLoggedIn, require('./routes/comments.js'));
 
 // Use a "catch-all" route to deliver the frontend's production index.html
 app.get('*', function (req, res) {

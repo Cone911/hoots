@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import * as hootService from '../../services/hootService';
+import * as commentService from '../../services/commentService';
 
 const CommentForm = (props) => {
   const [formData, setFormData] = useState({ text: '' });
@@ -8,13 +8,13 @@ const CommentForm = (props) => {
     setFormData({ ...formData, [evt.target.name]: evt.target.value });
   };
 
-    const handleSubmit = (evt) => {
+    const handleSubmit = async (evt) => {
         evt.preventDefault();
-        props.handleAddComment(formData);
+        const updatedHoot = await commentService.create(props.hootId, formData);
+        props.handleAddComment(updatedHoot);
         setFormData({ text: '' });
     };
   
-
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="text-input">Your comment:</label>
